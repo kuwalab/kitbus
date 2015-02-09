@@ -9,7 +9,7 @@ import java.nio.charset.Charset;
 import java.util.Optional;
 
 public class HttpUtil {
-	public static Optional<String> get(String address, String charset) {
+	public static Optional<String> getText(String address, String charset) {
 		HttpURLConnection conn = null;
 		try {
 			URL url = new URL(address);
