@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApiController {
 	@RequestMapping("/servicetable")
 	public String servicetable() {
-		Optional<String> stcsv = HttpUtil.get(
+		Optional<String> stcsv = HttpUtil.getText(
 				"http://www.kanazawa-it.ac.jp/shuttlebus/servicetable.csv",
 				"Windows-31J");
 		String csv = stcsv.orElse("");
