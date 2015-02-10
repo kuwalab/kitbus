@@ -15,8 +15,8 @@ public class ApiController {
 		Optional<String> stcsv = HttpUtil.getText(
 				"http://www.kanazawa-it.ac.jp/shuttlebus/servicetable.csv",
 				"Windows-31J");
-		String csv = stcsv.orElse("");
+		ServiceTable serviceTable = new ServiceTable(stcsv);
 
-		return "Hello world!";
+		return "Hello world " + serviceTable.getVersion();
 	}
 }
