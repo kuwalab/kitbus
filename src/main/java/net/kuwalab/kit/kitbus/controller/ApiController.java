@@ -38,4 +38,13 @@ public class ApiController {
 		}
 		return jsonString.orElse("{}");
 	}
+
+	@RequestMapping(value = "/timetable", method = RequestMethod.GET, produces = "application/json")
+	public String timetable() {
+		Optional<String> stcsv = HttpUtil.getText(
+				"http://www.kanazawa-it.ac.jp/shuttlebus/timetable.csv",
+				"Windows-31J");
+
+		return stcsv.orElse("");
+	}
 }
