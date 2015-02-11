@@ -3,6 +3,7 @@ package net.kuwalab.kit.kitbus.controller;
 import java.io.IOException;
 import java.util.Optional;
 
+import net.kuwalab.kit.kitbus.model.ServiceTable;
 import net.kuwalab.kit.kitbus.util.HttpUtil;
 
 import org.springframework.web.bind.annotation.RequestMapping;

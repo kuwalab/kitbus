@@ -1,4 +1,4 @@
-package net.kuwalab.kit.kitbus.controller;
+package net.kuwalab.kit.kitbus.model;
 
 public enum ServiceYoubi {
 	WEEKDAY, SATURDAY, SUNDAY;

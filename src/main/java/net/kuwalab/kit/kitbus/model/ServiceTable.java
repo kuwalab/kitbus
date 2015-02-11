@@ -1,4 +1,4 @@
-package net.kuwalab.kit.kitbus.controller;
+package net.kuwalab.kit.kitbus.model;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
