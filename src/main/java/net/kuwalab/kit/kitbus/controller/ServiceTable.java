@@ -1,5 +1,9 @@
 package net.kuwalab.kit.kitbus.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -10,13 +14,12 @@ public class ServiceTable {
 	private static final int VERSION_NOTHING = -1;
 
 	public ServiceTable(Optional<String> stcsv) {
-		if (!searchVersion(stcsv)) {
+		if (!readCsv(stcsv)) {
 			version = VERSION_NOTHING;
-			return;
 		}
 	}
 
-	private boolean searchVersion(Optional<String> stcsv) {
+	private boolean readCsv(Optional<String> stcsv) {
 		if (!stcsv.isPresent()) {
 			return false;
 		}
@@ -37,7 +40,33 @@ public class ServiceTable {
 			return false;
 		}
 
+		readServiceTable(lines);
+
 		return true;
+	}
+
+	private void readServiceTable(String[] lines) {
+		serviceMap = new HashMap<String, ServiceYoubi>();
+
+		// 長さが2以上であることはチェック済み
+		for (int i = 2; i < lines.length; i++) {
+			String[] dates = lines[i].split(",");
+			if (dates.length != 2) {
+				// ないはず
+				continue;
+			}
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/M/d");
+			LocalDate dateTime;
+			try {
+				dateTime = LocalDate.parse(dates[0], dtf);
+			} catch (DateTimeParseException e) {
+				// ないはず
+				continue;
+			}
+			dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+			String date = dateTime.format(dtf);
+			serviceMap.put(date, ServiceYoubi.getServiceYoubi(dates[1]));
+		}
 	}
 
 	public int getVersion() {
@@ -54,5 +83,11 @@ public class ServiceTable {
 
 	public void setServiceMap(Map<String, ServiceYoubi> serviceMap) {
 		this.serviceMap = serviceMap;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceTable [version=" + version + ", serviceMap="
+				+ serviceMap + "]";
 	}
 }

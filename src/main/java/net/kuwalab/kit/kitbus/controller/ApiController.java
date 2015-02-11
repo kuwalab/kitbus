@@ -17,6 +17,6 @@ public class ApiController {
 				"Windows-31J");
 		ServiceTable serviceTable = new ServiceTable(stcsv);
 
-		return "Hello world " + serviceTable.getVersion();
+		return "Hello world " + serviceTable.toString();
 	}
 }
