@@ -25,7 +25,7 @@ public class ApiController {
 		ServiceTable serviceTable = new ServiceTable(stcsv);
 
 		ObjectMapper objectMapper = new ObjectMapper();
-		Optional<String> jsonString = null;
+		Optional<String> jsonString = Optional.empty();
 
 		try {
 			jsonString = Optional.of(objectMapper
