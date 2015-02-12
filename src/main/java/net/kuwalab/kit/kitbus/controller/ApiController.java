@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import net.kuwalab.kit.kitbus.model.ServiceTable;
+import net.kuwalab.kit.kitbus.model.TimeTables;
 import net.kuwalab.kit.kitbus.util.HttpUtil;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,10 +43,25 @@ public class ApiController {
 
 	@RequestMapping(value = "/timetable", method = RequestMethod.GET, produces = "application/json")
 	public String timetable() {
-		Optional<String> stcsv = HttpUtil.getText(
+		Optional<String> ttcsv = HttpUtil.getText(
 				"http://www.kanazawa-it.ac.jp/shuttlebus/timetable.csv",
 				"Windows-31J");
 
-		return stcsv.orElse("");
+		TimeTables timeTables = new TimeTables(ttcsv);
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		Optional<String> jsonString = Optional.empty();
+
+		try {
+			jsonString = Optional.of(objectMapper
+					.writeValueAsString(timeTables));
+		} catch (JsonGenerationException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return jsonString.orElse("{}");
 	}
 }
