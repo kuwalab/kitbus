@@ -51,7 +51,7 @@ public class TimeTables {
 
 	private void readTimeTable(String[] lines) {
 		// 長さが1以上であることは確認済み
-		List<TimeTable> timeTableList = new ArrayList<>();
+		timeTableList = new ArrayList<>();
 		TimeTable timeTable = new TimeTable();
 		for (int i = 1; i < lines.length; i++) {
 			if (lines[i].startsWith("end")) {
