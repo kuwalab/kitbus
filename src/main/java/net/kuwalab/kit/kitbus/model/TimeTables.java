@@ -53,6 +53,7 @@ public class TimeTables {
 		// 長さが1以上であることは確認済み
 		timeTableList = new ArrayList<>();
 		TimeTable timeTable = new TimeTable();
+		ServiceYoubi serviceYoubi = null;
 		for (int i = 1; i < lines.length; i++) {
 			if (lines[i].startsWith("end")) {
 				timeTableList.add(timeTable);
@@ -60,9 +61,17 @@ public class TimeTables {
 					break;
 				}
 				timeTable = new TimeTable();
-				continue;
+				timeTable.setServiceYoubi(serviceYoubi);
 			}
-			timeTable.readLine(lines[i]);
+			if (lines[i].startsWith("月曜")) {
+				serviceYoubi = ServiceYoubi.WEEKDAY;
+				timeTable.setServiceYoubi(serviceYoubi);
+			} else if (lines[i].startsWith("土曜")) {
+				serviceYoubi = ServiceYoubi.SATURDAY;
+				timeTable.setServiceYoubi(serviceYoubi);
+			} else {
+				timeTable.readLine(lines[i]);
+			}
 		}
 	}
 
