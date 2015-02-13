@@ -4,11 +4,12 @@ public class TimeTable {
 	private ServiceYoubi serviceYoubi;
 
 	public void readLine(String line) {
+		// 曜日
 		if (line.startsWith("月曜")) {
 			serviceYoubi = ServiceYoubi.WEEKDAY;
 			return;
 		}
-		if (line.startsWith("土曜")) {
+		if (line.startsWith("土曜(祝祭日")) {
 			serviceYoubi = ServiceYoubi.SATURDAY;
 			return;
 		}
