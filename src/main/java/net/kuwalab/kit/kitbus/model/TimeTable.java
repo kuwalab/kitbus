@@ -12,6 +12,11 @@ public class TimeTable {
 
 	private List<List<String>> busStopTimeList;
 
+	public TimeTable() {
+		busStopNameList = new ArrayList<>();
+		busStopTimeList = new ArrayList<>();
+	}
+
 	public void readLine(String line) {
 		// 曜日
 		if (line.startsWith("月曜")) {
@@ -33,11 +38,17 @@ public class TimeTable {
 		}
 		if (line.startsWith("便名")) {
 			String[] busStopNames = line.split(",");
-			busStopNameList = new ArrayList<>();
 			for (int i = 1; i < busStopNames.length; i++) {
 				busStopNameList.add(busStopNames[i]);
 			}
 			return;
+		}
+		// 残りは時刻表
+		List<String> list = new ArrayList<>();
+		busStopTimeList.add(list);
+		String[] busStopTimes = line.split(",");
+		for (int i = 1; i < busStopTimes.length; i++) {
+			list.add(busStopTimes[i]);
 		}
 	}
 

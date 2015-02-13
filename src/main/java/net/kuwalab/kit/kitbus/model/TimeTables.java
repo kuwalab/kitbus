@@ -68,6 +68,7 @@ public class TimeTables {
 				// 保管していた運用曜日をセットする
 				// もし、運行曜日があれば上書きされるので問題ない
 				timeTable.setServiceYoubi(beforeServiceYoubi);
+				continue;
 			}
 			timeTable.readLine(lines[i]);
 		}
