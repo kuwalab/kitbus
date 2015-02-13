@@ -6,8 +6,11 @@ public class TimeTable {
 	public void readLine(String line) {
 		if (line.startsWith("月曜")) {
 			serviceYoubi = ServiceYoubi.WEEKDAY;
-		} else if (line.startsWith("土曜")) {
+			return;
+		}
+		if (line.startsWith("土曜")) {
 			serviceYoubi = ServiceYoubi.SATURDAY;
+			return;
 		}
 	}
 
