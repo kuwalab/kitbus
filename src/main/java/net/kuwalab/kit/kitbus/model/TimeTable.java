@@ -29,11 +29,11 @@ public class TimeTable {
 		}
 		// 往復
 		if (line.startsWith("扇が丘→八束穂")) {
-			shuttle = Shuttle.Outward;
+			shuttle = Shuttle.OUTWARD;
 			return;
 		}
 		if (line.startsWith("八束穂→扇が丘")) {
-			shuttle = Shuttle.Homeward;
+			shuttle = Shuttle.HOMEWARD;
 			return;
 		}
 		if (line.startsWith("便名")) {
