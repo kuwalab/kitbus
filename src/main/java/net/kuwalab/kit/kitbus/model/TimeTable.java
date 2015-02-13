@@ -1,9 +1,16 @@
 package net.kuwalab.kit.kitbus.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TimeTable {
 	private ServiceYoubi serviceYoubi;
 
 	private Shuttle shuttle;
+
+	private List<String> busStopNameList;
+
+	private List<List<String>> busStopTimeList;
 
 	public void readLine(String line) {
 		// 曜日
@@ -24,6 +31,14 @@ public class TimeTable {
 			shuttle = Shuttle.Homeward;
 			return;
 		}
+		if (line.startsWith("便名")) {
+			String[] busStopNames = line.split(",");
+			busStopNameList = new ArrayList<>();
+			for (int i = 1; i < busStopNames.length; i++) {
+				busStopNameList.add(busStopNames[i]);
+			}
+			return;
+		}
 	}
 
 	public ServiceYoubi getServiceYoubi() {
@@ -40,5 +55,21 @@ public class TimeTable {
 
 	public void setShuttle(Shuttle shuttle) {
 		this.shuttle = shuttle;
+	}
+
+	public List<String> getBusStopNameList() {
+		return busStopNameList;
+	}
+
+	public void setBusStopNameList(List<String> busStopNameList) {
+		this.busStopNameList = busStopNameList;
+	}
+
+	public List<List<String>> getBusStopTimeList() {
+		return busStopTimeList;
+	}
+
+	public void setBusStopTimeList(List<List<String>> busStopTimeList) {
+		this.busStopTimeList = busStopTimeList;
 	}
 }

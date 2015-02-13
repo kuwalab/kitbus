@@ -56,6 +56,7 @@ public class TimeTables {
 		ServiceYoubi beforeServiceYoubi = null;
 		for (int i = 1; i < lines.length; i++) {
 			if (lines[i].startsWith("end")) {
+				// 運行曜日は連続している場合省略されるので、保管しておく
 				if (timeTable.getServiceYoubi() != null) {
 					beforeServiceYoubi = timeTable.getServiceYoubi();
 				}
@@ -64,6 +65,8 @@ public class TimeTables {
 					break;
 				}
 				timeTable = new TimeTable();
+				// 保管していた運用曜日をセットする
+				// もし、運行曜日があれば上書きされるので問題ない
 				timeTable.setServiceYoubi(beforeServiceYoubi);
 			}
 			timeTable.readLine(lines[i]);
