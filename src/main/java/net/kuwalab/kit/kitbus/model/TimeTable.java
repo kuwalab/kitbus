@@ -3,6 +3,8 @@ package net.kuwalab.kit.kitbus.model;
 public class TimeTable {
 	private ServiceYoubi serviceYoubi;
 
+	private Shuttle shuttle;
+
 	public void readLine(String line) {
 		// 曜日
 		if (line.startsWith("月曜")) {
@@ -13,6 +15,15 @@ public class TimeTable {
 			serviceYoubi = ServiceYoubi.SATURDAY;
 			return;
 		}
+		// 往復
+		if (line.startsWith("扇が丘→八束穂")) {
+			shuttle = Shuttle.Outward;
+			return;
+		}
+		if (line.startsWith("八束穂→扇が丘")) {
+			shuttle = Shuttle.Homeward;
+			return;
+		}
 	}
 
 	public ServiceYoubi getServiceYoubi() {
@@ -21,5 +32,13 @@ public class TimeTable {
 
 	public void setServiceYoubi(ServiceYoubi serviceYoubi) {
 		this.serviceYoubi = serviceYoubi;
+	}
+
+	public Shuttle getShuttle() {
+		return shuttle;
+	}
+
+	public void setShuttle(Shuttle shuttle) {
+		this.shuttle = shuttle;
 	}
 }
