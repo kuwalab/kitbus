@@ -7,7 +7,7 @@ import java.util.List;
  * 
  * @author kuwalab
  */
-public class TimeTable {
+public class Timetable {
 	private ServiceDay serviceYoubi;
 
 	private Shuttle shuttle;
@@ -16,7 +16,7 @@ public class TimeTable {
 
 	private List<List<String>> busStopTimeList;
 
-	public TimeTable() {
+	public Timetable() {
 		busStopNameList = new ArrayList<>();
 		busStopTimeList = new ArrayList<>();
 	}

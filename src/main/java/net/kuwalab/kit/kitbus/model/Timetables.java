@@ -8,14 +8,14 @@ import java.util.Optional;
  * 
  * @author kuwalab
  */
-public class TimeTables {
+public class Timetables {
 	private int version;
 
-	private List<TimeTable> timeTableList;
+	private List<Timetable> timetableList;
 
 	private static final int VERSION_NOTHING = -1;
 
-	public TimeTables(Optional<String> ttcsv) {
+	public Timetables(Optional<String> ttcsv) {
 		if (!readCsv(ttcsv)) {
 			version = VERSION_NOTHING;
 		}
@@ -49,26 +49,26 @@ public class TimeTables {
 
 	private void readTimeTable(String[] lines) {
 		// 長さが1以上であることは確認済み
-		timeTableList = new ArrayList<>();
-		TimeTable timeTable = new TimeTable();
+		timetableList = new ArrayList<>();
+		Timetable timetable = new Timetable();
 		ServiceDay beforeServiceYoubi = null;
 		for (int i = 1; i < lines.length; i++) {
 			if (lines[i].startsWith("end")) {
 				// 運行曜日は連続している場合省略されるので、保管しておく
-				if (timeTable.getServiceYoubi() != null) {
-					beforeServiceYoubi = timeTable.getServiceYoubi();
+				if (timetable.getServiceYoubi() != null) {
+					beforeServiceYoubi = timetable.getServiceYoubi();
 				}
-				timeTableList.add(timeTable);
+				timetableList.add(timetable);
 				if (i == lines.length - 1) {
 					break;
 				}
-				timeTable = new TimeTable();
+				timetable = new Timetable();
 				// 保管していた運用曜日をセットする
 				// もし、運行曜日があれば上書きされるので問題ない
-				timeTable.setServiceYoubi(beforeServiceYoubi);
+				timetable.setServiceYoubi(beforeServiceYoubi);
 				continue;
 			}
-			timeTable.readLine(lines[i]);
+			timetable.readLine(lines[i]);
 		}
 	}
 
@@ -80,11 +80,11 @@ public class TimeTables {
 		this.version = version;
 	}
 
-	public List<TimeTable> getTimeTableList() {
-		return timeTableList;
+	public List<Timetable> getTimetableList() {
+		return timetableList;
 	}
 
-	public void setTimeTableList(List<TimeTable> timeTableList) {
-		this.timeTableList = timeTableList;
+	public void setTimetableList(List<Timetable> timetableList) {
+		this.timetableList = timetableList;
 	}
 }

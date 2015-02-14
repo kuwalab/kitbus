@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import net.kuwalab.kit.kitbus.model.ServiceTable;
-import net.kuwalab.kit.kitbus.model.TimeTables;
+import net.kuwalab.kit.kitbus.model.Timetables;
 import net.kuwalab.kit.kitbus.util.HttpUtil;
 import net.kuwalab.kit.kitbus.util.JsonUtil;
 
@@ -28,8 +28,8 @@ public class ApiController {
 	private LocalDateTime serviceTableTime;
 	private ServiceTable serviceTable;
 
-	private LocalDateTime timeTablesTime;
-	private TimeTables timeTables;
+	private LocalDateTime timetablesTime;
+	private Timetables timetables;
 
 	@RequestMapping(value = "/servicetable", method = RequestMethod.GET, produces = "application/json")
 	public String servicetable() {
@@ -47,16 +47,17 @@ public class ApiController {
 
 	@RequestMapping(value = "/timetable", method = RequestMethod.GET, produces = "application/json")
 	public String timetable() {
-		if (passOneDay(timeTablesTime)) {
+		if (passOneDay(timetablesTime)) {
 			logger.info("timeTables create");
+			timetablesTime = LocalDateTime.now();
 			Optional<String> ttcsv = HttpUtil.getText(
 					"http://www.kanazawa-it.ac.jp/shuttlebus/timetable.csv",
 					"Windows-31J");
 
-			timeTables = new TimeTables(ttcsv);
+			timetables = new Timetables(ttcsv);
 		}
 
-		return JsonUtil.objectToJson(timeTables);
+		return JsonUtil.objectToJson(timetables);
 	}
 
 	/**
