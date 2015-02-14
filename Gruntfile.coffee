@@ -13,6 +13,7 @@ module.exports = (grunt) ->
           '<%= dirs.dev %>/kitbus.js': [
             '<%= dirs.coffee %>/App.coffee'
             '<%= dirs.coffee %>/model/*.coffee'
+            '<%= dirs.coffee %>/view/*.coffee'
             '<%= dirs.coffee %>/Init.coffee'
           ]
 

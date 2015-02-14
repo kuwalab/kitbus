@@ -53,26 +53,50 @@
 }).call(this);
 
 (function() {
-  var dateFormat, getServiceDay, serviceDay;
+  var AppView, dateFormat, getServiceDay,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  serviceDay = null;
+  AppView = (function(_super) {
+    __extends(AppView, _super);
 
-  $.ajax({
-    url: '/api/servicetable',
-    cache: false,
-    dataType: 'json'
-  }).then(function(data) {
-    serviceDay = getServiceDay(data);
-    console.log(serviceDay);
-    return $.ajax({
-      url: '/api/timetable',
-      cache: false,
-      dataType: 'json'
-    });
-  }).then(function(data) {
-    var timetable;
-    return timetable = data;
-  });
+    function AppView() {
+      return AppView.__super__.constructor.apply(this, arguments);
+    }
+
+    AppView.prototype.initialize = function() {
+      if (!AppView.initViewTmpl) {
+        AppView.initViewTmpl = _.template($('#initView').html());
+      }
+      return this.initView();
+    };
+
+    AppView.prototype.render = function() {
+      return this;
+    };
+
+    AppView.prototype.initView = function() {
+      return $.ajax({
+        url: '/api/servicetable',
+        cache: false,
+        dataType: 'json'
+      }).then(function(data) {
+        this.serviceDay = getServiceDay(data);
+        console.log(this.serviceDay);
+        return $.ajax({
+          url: '/api/timetable',
+          cache: false,
+          dataType: 'json'
+        });
+      }).then(function(data) {
+        var timetable;
+        return timetable = data;
+      });
+    };
+
+    return AppView;
+
+  })(Backbone.View);
 
   dateFormat = function(targetDate) {
     var date, month, year;
@@ -85,7 +109,7 @@
   };
 
   getServiceDay = function(servicetable) {
-    var date;
+    var date, serviceDay;
     date = new Date();
     serviceDay = servicetable.serviceMap[dateFormat(date)];
     if (serviceDay) {
@@ -99,5 +123,18 @@
     }
     return 'WEEKDAY';
   };
+
+  App.AppView = AppView;
+
+}).call(this);
+
+(function() {
+  var appView;
+
+  appView = new App.AppView({
+    el: '#main'
+  });
+
+  appView.render();
 
 }).call(this);
