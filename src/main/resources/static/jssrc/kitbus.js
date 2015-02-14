@@ -23,6 +23,8 @@
 
   App.TimetableCollection = TimetableCollection;
 
+  App.timetableCollection = new TimetableCollection();
+
 }).call(this);
 
 (function() {
@@ -104,7 +106,8 @@
     AppView.prototype.onChangeShuttle = function() {
       var shuttleChecked;
       shuttleChecked = this.$('input[name="shuttle"]:checked').val();
-      console.log(this.timetableArray[shuttleChecked]);
+      App.timetableCollection.reset(this.timetableArray[shuttleChecked]);
+      console.log(App.timetableCollection);
       return this.render();
     };
 

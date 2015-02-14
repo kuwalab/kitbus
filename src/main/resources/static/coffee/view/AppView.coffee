@@ -13,7 +13,8 @@ class AppView extends Backbone.View
 
   onChangeShuttle: ->
     shuttleChecked = @$('input[name="shuttle"]:checked').val()
-    console.log @timetableArray[shuttleChecked]
+    App.timetableCollection.reset(@timetableArray[shuttleChecked])
+    console.log App.timetableCollection
     do @render
 
   initView: ->
