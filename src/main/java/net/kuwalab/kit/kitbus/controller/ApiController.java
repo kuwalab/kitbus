@@ -27,6 +27,9 @@ public class ApiController {
 	private LocalDateTime serviceTableTime;
 	private ServiceTable serviceTable;
 
+	private LocalDateTime timeTablesTime;
+	private TimeTables timeTables;
+
 	@RequestMapping(value = "/servicetable", method = RequestMethod.GET, produces = "application/json")
 	public String servicetable() {
 		if (passOneDay(serviceTableTime)) {
@@ -56,11 +59,14 @@ public class ApiController {
 
 	@RequestMapping(value = "/timetable", method = RequestMethod.GET, produces = "application/json")
 	public String timetable() {
-		Optional<String> ttcsv = HttpUtil.getText(
-				"http://www.kanazawa-it.ac.jp/shuttlebus/timetable.csv",
-				"Windows-31J");
+		if (passOneDay(timeTablesTime)) {
+			logger.info("timeTables create");
+			Optional<String> ttcsv = HttpUtil.getText(
+					"http://www.kanazawa-it.ac.jp/shuttlebus/timetable.csv",
+					"Windows-31J");
 
-		TimeTables timeTables = new TimeTables(ttcsv);
+			timeTables = new TimeTables(ttcsv);
+		}
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		Optional<String> jsonString = Optional.empty();
