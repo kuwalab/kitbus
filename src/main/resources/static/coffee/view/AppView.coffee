@@ -12,7 +12,8 @@ class AppView extends Backbone.View
 
   onChangeShuttle: ->
     shuttleChecked = @$('input[name="shuttle"]:checked').val()
-    console.log(shuttleChecked)
+    
+    do @render
 
 
   initView: ->

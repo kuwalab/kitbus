@@ -82,7 +82,8 @@
     AppView.prototype.onChangeShuttle = function() {
       var shuttleChecked;
       shuttleChecked = this.$('input[name="shuttle"]:checked').val();
-      return console.log(shuttleChecked);
+      console.log(shuttleChecked);
+      return this.render();
     };
 
     AppView.prototype.initView = function() {
