@@ -80,7 +80,9 @@
     };
 
     AppView.prototype.onChangeShuttle = function() {
-      return console.log('click');
+      var shuttleChecked;
+      shuttleChecked = this.$('input[name="shuttle"]:checked').val();
+      return console.log(shuttleChecked);
     };
 
     AppView.prototype.initView = function() {
@@ -90,7 +92,6 @@
         dataType: 'json'
       }).then(function(data) {
         this.serviceDay = getServiceDay(data);
-        console.log(this.serviceDay);
         return $.ajax({
           url: '/api/timetable',
           cache: false,

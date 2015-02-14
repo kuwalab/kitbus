@@ -11,7 +11,9 @@ class AppView extends Backbone.View
     @
 
   onChangeShuttle: ->
-    console.log('click')
+    shuttleChecked = @$('input[name="shuttle"]:checked').val()
+    console.log(shuttleChecked)
+
 
   initView: ->
     $.ajax(
@@ -21,7 +23,6 @@ class AppView extends Backbone.View
     ).then((data) ->
       # 運行の曜日を取得
       @serviceDay = getServiceDay(data)
-      console.log(@serviceDay)
       $.ajax(
         url: '/api/timetable'
         cache: false
