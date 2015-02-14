@@ -35,7 +35,6 @@ class AppView extends Backbone.View
     return
 
   setTimetable: (timetableData) ->
-    console.log(timetableData)
     for timetable in timetableData.timetableList
       console.log(timetable)
     return
