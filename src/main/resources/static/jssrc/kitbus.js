@@ -37,11 +37,33 @@
       return TimetableModel.__super__.constructor.apply(this, arguments);
     }
 
+    TimetableModel.SHUTTLE_OUTWARD = 'OUTWARD';
+
+    TimetableModel.SHUTTLE_HOMEWARD = 'HOMEWARD';
+
     TimetableModel.prototype["default"] = {
       'building1': '',
       'building74': '',
       'building61': '',
       'building65': ''
+    };
+
+    TimetableModel.setTime = function(shuttle, timeArray) {
+      if (shuttle === TimetableModel.SHUTTLE_OUTWARD) {
+        return new TimetableModel({
+          building1: timeArray[0],
+          building74: timeArray[1],
+          building61: timeArray[2],
+          building65: timeArray[3]
+        });
+      } else {
+        return new TimetableModel({
+          building1: timeArray[3],
+          building74: timeArray[2],
+          building61: timeArray[1],
+          building65: timeArray[0]
+        });
+      }
     };
 
     return TimetableModel;
@@ -82,6 +104,7 @@
     AppView.prototype.onChangeShuttle = function() {
       var shuttleChecked;
       shuttleChecked = this.$('input[name="shuttle"]:checked').val();
+      console.log(this.timetableArray[shuttleChecked]);
       return this.render();
     };
 
@@ -107,13 +130,24 @@
     };
 
     AppView.prototype.setTimetable = function(timetableData) {
-      var timetable, _i, _len, _ref;
-      console.log(timetableData);
+      var timeArray, timetable, _i, _j, _len, _len1, _ref, _ref1;
+      this.serviceDay = 'WEEKDAY';
+      this.timetableArray = {
+        outward: [],
+        homeward: []
+      };
       _ref = timetableData.timetableList;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         timetable = _ref[_i];
-        console.log(timetable);
+        if (timetable.serviceDay === this.serviceDay) {
+          _ref1 = timetable.busStopTimeList;
+          for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+            timeArray = _ref1[_j];
+            this.timetableArray[timetable.shuttle.toLowerCase()].push(App.TimetableModel.setTime(timetable.shuttle, timeArray));
+          }
+        }
       }
+      console.log(this.timetableArray);
     };
 
     return AppView;
