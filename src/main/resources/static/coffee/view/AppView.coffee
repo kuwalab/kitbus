@@ -6,6 +6,7 @@ class AppView extends Backbone.View
     if !AppView.initViewTmpl
       AppView.initViewTmpl = _.template($('#initView').html())
     do @initView
+    return
 
   render: ->
     @
@@ -15,13 +16,12 @@ class AppView extends Backbone.View
     
     do @render
 
-
   initView: ->
     $.ajax(
       url: '/api/servicetable'
       cache: false
       dataType: 'json'
-    ).then((data) ->
+    ).then((data) =>
       # 運行の曜日を取得
       @serviceDay = getServiceDay(data)
       $.ajax(
@@ -29,9 +29,16 @@ class AppView extends Backbone.View
         cache: false
         dataType: 'json'
       )
-    ).then((data) ->
-      timetable = data
+    ).then((data) =>
+      @setTimetable(data)
     )
+    return
+
+  setTimetable: (timetableData) ->
+    console.log(timetableData)
+    for timetable in timetableData.timetableList
+      console.log(timetable)
+    return
 
 dateFormat = (targetDate) ->
   year = targetDate.getFullYear()

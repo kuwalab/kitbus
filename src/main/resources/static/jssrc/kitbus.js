@@ -72,7 +72,7 @@
       if (!AppView.initViewTmpl) {
         AppView.initViewTmpl = _.template($('#initView').html());
       }
-      return this.initView();
+      this.initView();
     };
 
     AppView.prototype.render = function() {
@@ -82,26 +82,38 @@
     AppView.prototype.onChangeShuttle = function() {
       var shuttleChecked;
       shuttleChecked = this.$('input[name="shuttle"]:checked').val();
-      console.log(shuttleChecked);
       return this.render();
     };
 
     AppView.prototype.initView = function() {
-      return $.ajax({
+      $.ajax({
         url: '/api/servicetable',
         cache: false,
         dataType: 'json'
-      }).then(function(data) {
-        this.serviceDay = getServiceDay(data);
-        return $.ajax({
-          url: '/api/timetable',
-          cache: false,
-          dataType: 'json'
-        });
-      }).then(function(data) {
-        var timetable;
-        return timetable = data;
-      });
+      }).then((function(_this) {
+        return function(data) {
+          _this.serviceDay = getServiceDay(data);
+          return $.ajax({
+            url: '/api/timetable',
+            cache: false,
+            dataType: 'json'
+          });
+        };
+      })(this)).then((function(_this) {
+        return function(data) {
+          return _this.setTimetable(data);
+        };
+      })(this));
+    };
+
+    AppView.prototype.setTimetable = function(timetableData) {
+      var timetable, _i, _len, _ref;
+      console.log(timetableData);
+      _ref = timetableData.timetableList;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        timetable = _ref[_i];
+        console.log(timetable);
+      }
     };
 
     return AppView;
