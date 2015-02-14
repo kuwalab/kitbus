@@ -64,6 +64,10 @@
       return AppView.__super__.constructor.apply(this, arguments);
     }
 
+    AppView.prototype.events = {
+      'change input[name="shuttle"]': 'onChangeShuttle'
+    };
+
     AppView.prototype.initialize = function() {
       if (!AppView.initViewTmpl) {
         AppView.initViewTmpl = _.template($('#initView').html());
@@ -73,6 +77,10 @@
 
     AppView.prototype.render = function() {
       return this;
+    };
+
+    AppView.prototype.onChangeShuttle = function() {
+      return console.log('click');
     };
 
     AppView.prototype.initView = function() {

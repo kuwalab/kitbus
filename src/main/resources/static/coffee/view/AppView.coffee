@@ -1,4 +1,7 @@
 class AppView extends Backbone.View
+  events:
+    'change input[name="shuttle"]': 'onChangeShuttle'
+
   initialize: ->
     if !AppView.initViewTmpl
       AppView.initViewTmpl = _.template($('#initView').html())
@@ -6,6 +9,9 @@ class AppView extends Backbone.View
 
   render: ->
     @
+
+  onChangeShuttle: ->
+    console.log('click')
 
   initView: ->
     $.ajax(
