@@ -8,7 +8,7 @@ import java.util.List;
  * @author kuwalab
  */
 public class Timetable {
-	private ServiceDay serviceYoubi;
+	private ServiceDay serviceDay;
 
 	private Shuttle shuttle;
 
@@ -24,11 +24,11 @@ public class Timetable {
 	public void readLine(String line) {
 		// 曜日
 		if (line.startsWith("月曜")) {
-			serviceYoubi = ServiceDay.WEEKDAY;
+			serviceDay = ServiceDay.WEEKDAY;
 			return;
 		}
 		if (line.startsWith("土曜(祝祭日")) {
-			serviceYoubi = ServiceDay.SATURDAY;
+			serviceDay = ServiceDay.SATURDAY;
 			return;
 		}
 		// 往復
@@ -56,12 +56,12 @@ public class Timetable {
 		}
 	}
 
-	public ServiceDay getServiceYoubi() {
-		return serviceYoubi;
+	public ServiceDay getServiceDay() {
+		return serviceDay;
 	}
 
-	public void setServiceYoubi(ServiceDay serviceYoubi) {
-		this.serviceYoubi = serviceYoubi;
+	public void setServiceDay(ServiceDay serviceYoubi) {
+		this.serviceDay = serviceYoubi;
 	}
 
 	public Shuttle getShuttle() {

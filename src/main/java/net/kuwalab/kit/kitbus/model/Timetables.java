@@ -51,12 +51,12 @@ public class Timetables {
 		// 長さが1以上であることは確認済み
 		timetableList = new ArrayList<>();
 		Timetable timetable = new Timetable();
-		ServiceDay beforeServiceYoubi = null;
+		ServiceDay beforeServiceDay = null;
 		for (int i = 1; i < lines.length; i++) {
 			if (lines[i].startsWith("end")) {
 				// 運行曜日は連続している場合省略されるので、保管しておく
-				if (timetable.getServiceYoubi() != null) {
-					beforeServiceYoubi = timetable.getServiceYoubi();
+				if (timetable.getServiceDay() != null) {
+					beforeServiceDay = timetable.getServiceDay();
 				}
 				timetableList.add(timetable);
 				if (i == lines.length - 1) {
@@ -65,7 +65,7 @@ public class Timetables {
 				timetable = new Timetable();
 				// 保管していた運用曜日をセットする
 				// もし、運行曜日があれば上書きされるので問題ない
-				timetable.setServiceYoubi(beforeServiceYoubi);
+				timetable.setServiceDay(beforeServiceDay);
 				continue;
 			}
 			timetable.readLine(lines[i]);
