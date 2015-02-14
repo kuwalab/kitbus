@@ -51,7 +51,7 @@ public class TimeTables {
 		// 長さが1以上であることは確認済み
 		timeTableList = new ArrayList<>();
 		TimeTable timeTable = new TimeTable();
-		ServiceYoubi beforeServiceYoubi = null;
+		ServiceDay beforeServiceYoubi = null;
 		for (int i = 1; i < lines.length; i++) {
 			if (lines[i].startsWith("end")) {
 				// 運行曜日は連続している場合省略されるので、保管しておく

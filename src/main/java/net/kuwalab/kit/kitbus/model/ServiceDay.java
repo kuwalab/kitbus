@@ -4,10 +4,10 @@ package net.kuwalab.kit.kitbus.model;
  * 
  * @author kuwalab
  */
-public enum ServiceYoubi {
+public enum ServiceDay {
 	WEEKDAY, SATURDAY, SUNDAY;
 
-	public static ServiceYoubi getServiceYoubi(String youbi) {
+	public static ServiceDay getServiceDay(String youbi) {
 		if (youbi == null) {
 			return WEEKDAY;
 		}

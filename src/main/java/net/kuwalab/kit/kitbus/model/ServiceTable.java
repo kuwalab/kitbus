@@ -13,7 +13,7 @@ import java.util.Optional;
  */
 public class ServiceTable {
 	private int version;
-	private Map<String, ServiceYoubi> serviceMap;
+	private Map<String, ServiceDay> serviceMap;
 
 	private static final int VERSION_NOTHING = -1;
 
@@ -50,7 +50,7 @@ public class ServiceTable {
 	}
 
 	private void readServiceTable(String[] lines) {
-		serviceMap = new HashMap<String, ServiceYoubi>();
+		serviceMap = new HashMap<String, ServiceDay>();
 
 		// 長さが2以上であることはチェック済み
 		for (int i = 2; i < lines.length; i++) {
@@ -69,7 +69,7 @@ public class ServiceTable {
 			}
 			dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 			String date = dateTime.format(dtf);
-			serviceMap.put(date, ServiceYoubi.getServiceYoubi(dates[1]));
+			serviceMap.put(date, ServiceDay.getServiceDay(dates[1]));
 		}
 	}
 
@@ -81,11 +81,11 @@ public class ServiceTable {
 		this.version = version;
 	}
 
-	public Map<String, ServiceYoubi> getServiceMap() {
+	public Map<String, ServiceDay> getServiceMap() {
 		return serviceMap;
 	}
 
-	public void setServiceMap(Map<String, ServiceYoubi> serviceMap) {
+	public void setServiceMap(Map<String, ServiceDay> serviceMap) {
 		this.serviceMap = serviceMap;
 	}
 
