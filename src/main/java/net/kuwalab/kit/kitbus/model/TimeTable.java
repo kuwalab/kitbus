@@ -3,6 +3,10 @@ package net.kuwalab.kit.kitbus.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author kuwalab
+ */
 public class TimeTable {
 	private ServiceYoubi serviceYoubi;
 

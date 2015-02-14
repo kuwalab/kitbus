@@ -1,5 +1,9 @@
 package net.kuwalab.kit.kitbus.model;
 
+/**
+ * 
+ * @author kuwalab
+ */
 public enum ServiceYoubi {
 	WEEKDAY, SATURDAY, SUNDAY;
 

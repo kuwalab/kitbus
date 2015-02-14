@@ -7,6 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * 
+ * @author kuwalab
+ */
 public class ServiceTable {
 	private int version;
 	private Map<String, ServiceYoubi> serviceMap;

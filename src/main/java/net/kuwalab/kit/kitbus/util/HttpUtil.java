@@ -8,6 +8,11 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Optional;
 
+/**
+ * HTTP関連のユーティリティクラス
+ * 
+ * @author kuwalab
+ */
 public abstract class HttpUtil {
 	public static Optional<String> getText(String address, String charset) {
 		HttpURLConnection conn = null;

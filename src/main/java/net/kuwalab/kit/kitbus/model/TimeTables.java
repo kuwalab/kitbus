@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * 
+ * @author kuwalab
+ */
 public class TimeTables {
 	private int version;
 
