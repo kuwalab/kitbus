@@ -1,22 +1,18 @@
 package net.kuwalab.kit.kitbus.controller;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 import net.kuwalab.kit.kitbus.model.ServiceTable;
 import net.kuwalab.kit.kitbus.model.TimeTables;
 import net.kuwalab.kit.kitbus.util.HttpUtil;
+import net.kuwalab.kit.kitbus.util.JsonUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("/api")
@@ -41,20 +37,7 @@ public class ApiController {
 			serviceTable = new ServiceTable(stcsv);
 		}
 
-		ObjectMapper objectMapper = new ObjectMapper();
-		Optional<String> jsonString = Optional.empty();
-
-		try {
-			jsonString = Optional.of(objectMapper
-					.writeValueAsString(serviceTable));
-		} catch (JsonGenerationException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return jsonString.orElse("{}");
+		return JsonUtil.objectToJson(serviceTable);
 	}
 
 	@RequestMapping(value = "/timetable", method = RequestMethod.GET, produces = "application/json")
@@ -68,20 +51,7 @@ public class ApiController {
 			timeTables = new TimeTables(ttcsv);
 		}
 
-		ObjectMapper objectMapper = new ObjectMapper();
-		Optional<String> jsonString = Optional.empty();
-
-		try {
-			jsonString = Optional.of(objectMapper
-					.writeValueAsString(timeTables));
-		} catch (JsonGenerationException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return jsonString.orElse("{}");
+		return JsonUtil.objectToJson(timeTables);
 	}
 
 	/**

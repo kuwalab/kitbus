@@ -8,7 +8,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Optional;
 
-public class HttpUtil {
+public abstract class HttpUtil {
 	public static Optional<String> getText(String address, String charset) {
 		HttpURLConnection conn = null;
 		try {
