@@ -1,4 +1,4 @@
-class ServiceCollection extends Backbone.Collection
-  model: App.ServiceModel
+class TimetableCollection extends Backbone.Collection
+  model: App.TimetableModel
 
-App.ServiceCollection = ServiceCollection
+App.TimetableCollection = TimetableCollection

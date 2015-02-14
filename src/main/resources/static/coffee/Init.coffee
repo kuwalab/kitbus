@@ -1,26 +1,36 @@
-initData = []
+serviceDay = null
 
 $.ajax(
-  url: 'data/servicetable.csv'
+  url: '/api/servicetable'
   cache: false
-  beforeSend = (xhr) ->
-    xhr.overrideMimeType 'text/plain; charset=Shift_JIS'
-    return
-  dataType: 'text'
-).done((data) ->
-  serviceArray = data.split(/\r\n|\r|\n/)
-
-  for value, index in serviceArray
-    continue if index < 2
-    break if value is ''
-    serviceData = value.split(/,/)
-    initData[index - 2] = new App.ServiceModel(
-      data: serviceData[0]
-      youbiType: serviceData[1]
-    )
-
-  console.log(initData)
-  serviceCollection = new App.ServiceCollection(initData)
-  console.log(serviceCollection)
+  dataType: 'json'
+).then((data) ->
+  # 運行の曜日を取得
+  serviceDay = getServiceDay(data)
+  console.log(serviceDay)
+  $.ajax(
+    url: '/api/timetable'
+    cache: false
+    dataType: 'json'
+  )
+).then((data) ->
+  timetable = data
 )
 
+dateFormat = (targetDate) ->
+  year = targetDate.getFullYear()
+  month = targetDate.getMonth() + 1
+  date = targetDate.getDate()
+
+  month = if month < 10 then '0' + month else month
+  date = if date < 10 then '0' + date else date
+
+  "#{year}/#{month}/#{date}"
+
+getServiceDay = (servicetable) ->
+  date = new Date()
+  serviceDay = servicetable.serviceMap[dateFormat(date)]
+  return serviceDay if serviceDay
+  return 'SUNDAY' if date.getDay() is 0
+  return 'SATURDAY' if date.getDay() is 6
+  'WEEKDAY'
