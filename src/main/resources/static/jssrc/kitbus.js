@@ -16,8 +16,7 @@
     }
 
     RideBusModel.prototype.defaults = {
-      departureTime: '',
-      beforeAlert: '10'
+      departureTime: ''
     };
 
     return RideBusModel;
@@ -224,6 +223,10 @@
 
     RideBusView.prototype.model = App.rideBusModel;
 
+    RideBusView.prototype.events = {
+      'change #beforeAlert': 'onChangeBeforeAlert'
+    };
+
     RideBusView.prototype.initialize = function() {
       RideBusView.departureTimeTmpl = _.template($('#departureTimeTmpl').html());
       _.bindAll(this, 'onChange');
@@ -237,9 +240,8 @@
       return this;
     };
 
-    RideBusView.prototype.onChange = function() {
-      var beforeAlert, date, departureTime, nowHour, nowMinute, nowSecond, targetSecond, targetTime;
-      this.render();
+    RideBusView.prototype.setTimer = function() {
+      var beforeAlert, date, departureTime, i, nowHour, nowMinute, nowSecond, targetSecond, targetTime, value, _i, _len;
       departureTime = this.model.get('departureTime');
       if (departureTime === '') {
         return;
@@ -248,7 +250,6 @@
       if (beforeAlert === NaN) {
         return;
       }
-      this.model.set('beforeAlert', beforeAlert);
       Notification.requestPermission(function(selectedPermission) {
         var permission;
         return permission = selectedPermission;
@@ -258,6 +259,11 @@
       nowMinute = date.getMinutes();
       nowSecond = date.getSeconds();
       targetTime = departureTime.split(':');
+      for (i = _i = 0, _len = targetTime.length; _i < _len; i = ++_i) {
+        value = targetTime[i];
+        targetTime[i] = parseInt(value, 10);
+      }
+      console.log(nowHour, nowMinute, nowSecond, targetTime);
       targetSecond = (((targetTime[0] - nowHour) * 60 + targetTime[1] - nowMinute - beforeAlert) * 60 - nowSecond) * 1000;
       console.log(new Date(), targetSecond);
       if (targetSecond <= 0) {
@@ -271,6 +277,15 @@
           icon: 'icon.png'
         });
       }, targetSecond);
+    };
+
+    RideBusView.prototype.onChangeBeforeAlert = function() {
+      return this.setTimer();
+    };
+
+    RideBusView.prototype.onChange = function() {
+      this.render();
+      return this.setTimer();
     };
 
     return RideBusView;
