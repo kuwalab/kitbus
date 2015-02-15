@@ -3,4 +3,4 @@ class TimetableCollection extends Backbone.Collection
 
 App.TimetableCollection = TimetableCollection
 
-App.timetableCollection = new TimetableCollection()
+App.timetableList = new TimetableCollection()

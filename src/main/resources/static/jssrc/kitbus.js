@@ -23,7 +23,7 @@
 
   App.TimetableCollection = TimetableCollection;
 
-  App.timetableCollection = new TimetableCollection();
+  App.timetableList = new TimetableCollection();
 
 }).call(this);
 
@@ -106,8 +106,8 @@
     AppView.prototype.onChangeShuttle = function() {
       var shuttleChecked;
       shuttleChecked = this.$('input[name="shuttle"]:checked').val();
-      App.timetableCollection.reset(this.timetableArray[shuttleChecked]);
-      console.log(App.timetableCollection);
+      App.timetableList.reset(this.timetableArray[shuttleChecked]);
+      console.log(App.timetableList);
       return this.render();
     };
 
@@ -188,10 +188,39 @@
 }).call(this);
 
 (function() {
-  var appView;
+  var TimetableListView,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  TimetableListView = (function(_super) {
+    __extends(TimetableListView, _super);
+
+    function TimetableListView() {
+      return TimetableListView.__super__.constructor.apply(this, arguments);
+    }
+
+    TimetableListView.prototype.render = function() {
+      return this;
+    };
+
+    return TimetableListView;
+
+  })(Backbone.View);
+
+  App.TimetableListView = TimetableListView;
+
+}).call(this);
+
+(function() {
+  var appView, timetableListView;
 
   appView = new App.AppView({
     el: '#main'
+  });
+
+  timetableListView = new App.TimetableListView({
+    el: '#timetable',
+    collection: App.TimetableList
   });
 
   appView.render();
