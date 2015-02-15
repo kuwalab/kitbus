@@ -198,30 +198,33 @@
       return TimetableListView.__super__.constructor.apply(this, arguments);
     }
 
+    TimetableListView.prototype.events = {
+      'click tbody td': 'onClickTime'
+    };
+
     TimetableListView.prototype.initialize = function(options) {
-      if (!TimetableListView.timetableTmpl) {
-        TimetableListView.timetableTmpl = _.template($('#timetableTmpl').html());
-      }
-      if (!TimetableListView.timetableRowOutwardTmpl) {
-        TimetableListView.timetableRowOutwardTmpl = _.template($('#timetableRowOutwardTmpl').html());
-      }
-      if (!TimetableListView.timetableRowHomewardTmpl) {
-        TimetableListView.timetableRowHomewardTmpl = _.template($('#timetableRowHomewardTmpl').html());
-      }
+      TimetableListView.timetableTmpl = _.template($('#timetableTmpl').html());
+      TimetableListView.timetableHeaderOutwardTmpl = _.template($('#timetableHeaderOutwardTmpl').html());
+      TimetableListView.timetableHeaderHomewardTmpl = _.template($('#timetableHeaderHomewardTmpl').html());
+      TimetableListView.timetableRowOutwardTmpl = _.template($('#timetableRowOutwardTmpl').html());
+      TimetableListView.timetableRowHomewardTmpl = _.template($('#timetableRowHomewardTmpl').html());
       _.bindAll(this, 'onReset');
       this.collection = options.collection;
       return this.collection.on('reset', this.onReset);
     };
 
     TimetableListView.prototype.render = function() {
-      var $tbody;
+      var $tbody, $thead;
       this.$el.html(TimetableListView.timetableTmpl());
+      $thead = this.$('thead');
       $tbody = this.$('tbody');
       if (this.collection.shuttle === 'outward') {
+        $thead.html(TimetableListView.timetableHeaderOutwardTmpl());
         this.collection.each(function(timetableModel) {
           return $tbody.append(TimetableListView.timetableRowOutwardTmpl(timetableModel.toJSON()));
         });
       } else {
+        $thead.html(TimetableListView.timetableHeaderHomewardTmpl());
         this.collection.each(function(timetableModel) {
           return $tbody.append(TimetableListView.timetableRowHomewardTmpl(timetableModel.toJSON()));
         });
@@ -231,6 +234,10 @@
 
     TimetableListView.prototype.onReset = function() {
       return this.render();
+    };
+
+    TimetableListView.prototype.onClickTime = function(e) {
+      return console.log(e.currentTarget);
     };
 
     return TimetableListView;
