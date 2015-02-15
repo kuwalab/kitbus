@@ -4,6 +4,33 @@
 }).call(this);
 
 (function() {
+  var RideBusModel,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  RideBusModel = (function(_super) {
+    __extends(RideBusModel, _super);
+
+    function RideBusModel() {
+      return RideBusModel.__super__.constructor.apply(this, arguments);
+    }
+
+    RideBusModel.prototype["default"] = {
+      departureTime: '',
+      beforeAlert: ''
+    };
+
+    return RideBusModel;
+
+  })(Backbone.Model);
+
+  App.RideBusModel = RideBusModel;
+
+  App.rideBusModel = new App.RideBusModel();
+
+}).call(this);
+
+(function() {
   var TimetableCollection,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -187,6 +214,36 @@
 }).call(this);
 
 (function() {
+  var RideBusView,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  RideBusView = (function(_super) {
+    __extends(RideBusView, _super);
+
+    function RideBusView() {
+      return RideBusView.__super__.constructor.apply(this, arguments);
+    }
+
+    RideBusView.prototype.model = App.rideBusView;
+
+    RideBusView.prototype.render = function() {
+      return this;
+    };
+
+    return RideBusView;
+
+  })(Backbone.View);
+
+  App.RideBusView = RideBusView;
+
+  App.rideBusView = new RideBusView({
+    el: '#rideBus'
+  });
+
+}).call(this);
+
+(function() {
   var TimetableListView,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -244,9 +301,8 @@
         return;
       }
       if (this.collection.shuttle === 'homeward' && index >= 3) {
-        return;
+
       }
-      return console.log(index);
     };
 
     return TimetableListView;
@@ -267,6 +323,10 @@
   timetableListView = new App.TimetableListView({
     el: '#timetable',
     collection: App.timetableList
+  });
+
+  App.rideBusView = new App.RideBusView({
+    el: '#rideBus'
   });
 
   appView.render();
