@@ -31,11 +31,10 @@ class RideBusView extends Backbone.View
     targetTime = departureTime.split(':')
     for value, i in targetTime
       targetTime[i] = parseInt value, 10
-    console.log nowHour, nowMinute, nowSecond, targetTime
     targetSecond = (((targetTime[0] - nowHour) * 60 + targetTime[1] - nowMinute - beforeAlert) * 60 - nowSecond) * 1000
-    console.log new Date(), targetSecond
     return if targetSecond <= 0
-    setTimeout( ->
+    if @timer then clearTimeout(@timer)
+    @timer = setTimeout( ->
       notify = new Notification('バスが来ます', { tag: 'tag', body: '通知の本文', icon: 'icon.png' })
     , targetSecond)
 

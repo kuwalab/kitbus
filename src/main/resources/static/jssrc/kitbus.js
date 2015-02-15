@@ -263,13 +263,14 @@
         value = targetTime[i];
         targetTime[i] = parseInt(value, 10);
       }
-      console.log(nowHour, nowMinute, nowSecond, targetTime);
       targetSecond = (((targetTime[0] - nowHour) * 60 + targetTime[1] - nowMinute - beforeAlert) * 60 - nowSecond) * 1000;
-      console.log(new Date(), targetSecond);
       if (targetSecond <= 0) {
         return;
       }
-      return setTimeout(function() {
+      if (this.timer) {
+        clearTimeout(this.timer);
+      }
+      return this.timer = setTimeout(function() {
         var notify;
         return notify = new Notification('バスが来ます', {
           tag: 'tag',
