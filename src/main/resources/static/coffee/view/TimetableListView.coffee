@@ -37,5 +37,6 @@ class TimetableListView extends Backbone.View
     index = $td.parent('tr').find('td').index($td)
     return if @collection.shuttle is 'outward' and index >= 1
     return if @collection.shuttle is 'homeward' and index >= 3
+    App.rideBusModel.set 'departureTime', $td.text()
 
 App.TimetableListView = TimetableListView

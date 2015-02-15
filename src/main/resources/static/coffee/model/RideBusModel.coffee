@@ -1,7 +1,7 @@
 class RideBusModel extends Backbone.Model
-  default: {
+  defaults: {
     departureTime: ''
-    beforeAlert: ''
+    beforeAlert: '10'
   }
 
 App.RideBusModel = RideBusModel

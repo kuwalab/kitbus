@@ -15,9 +15,9 @@
       return RideBusModel.__super__.constructor.apply(this, arguments);
     }
 
-    RideBusModel.prototype["default"] = {
+    RideBusModel.prototype.defaults = {
       departureTime: '',
-      beforeAlert: ''
+      beforeAlert: '10'
     };
 
     return RideBusModel;
@@ -120,9 +120,6 @@
     };
 
     AppView.prototype.initialize = function() {
-      if (!AppView.initViewTmpl) {
-        AppView.initViewTmpl = _.template($('#initView').html());
-      }
       this.initView();
     };
 
@@ -225,10 +222,55 @@
       return RideBusView.__super__.constructor.apply(this, arguments);
     }
 
-    RideBusView.prototype.model = App.rideBusView;
+    RideBusView.prototype.model = App.rideBusModel;
+
+    RideBusView.prototype.initialize = function() {
+      RideBusView.departureTimeTmpl = _.template($('#departureTimeTmpl').html());
+      _.bindAll(this, 'onChange');
+      this.model.on('change', this.onChange);
+      this.$('#beforeAlert').val(this.model.get('beforeAlert'));
+      return this.render();
+    };
 
     RideBusView.prototype.render = function() {
+      this.$('#departureTime').html(RideBusView.departureTimeTmpl(this.model.toJSON()));
       return this;
+    };
+
+    RideBusView.prototype.onChange = function() {
+      var beforeAlert, date, departureTime, nowHour, nowMinute, nowSecond, targetSecond, targetTime;
+      this.render();
+      departureTime = this.model.get('departureTime');
+      if (departureTime === '') {
+        return;
+      }
+      beforeAlert = parseInt($('#beforeAlert').val(), 10);
+      if (beforeAlert === NaN) {
+        return;
+      }
+      this.model.set('beforeAlert', beforeAlert);
+      Notification.requestPermission(function(selectedPermission) {
+        var permission;
+        return permission = selectedPermission;
+      });
+      date = new Date();
+      nowHour = date.getHours();
+      nowMinute = date.getMinutes();
+      nowSecond = date.getSeconds();
+      targetTime = departureTime.split(':');
+      targetSecond = (((targetTime[0] - nowHour) * 60 + targetTime[1] - nowMinute - beforeAlert) * 60 - nowSecond) * 1000;
+      console.log(new Date(), targetSecond);
+      if (targetSecond <= 0) {
+        return;
+      }
+      return setTimeout(function() {
+        var notify;
+        return notify = new Notification('バスが来ます', {
+          tag: 'tag',
+          body: '通知の本文',
+          icon: 'icon.png'
+        });
+      }, targetSecond);
     };
 
     return RideBusView;
@@ -236,10 +278,6 @@
   })(Backbone.View);
 
   App.RideBusView = RideBusView;
-
-  App.rideBusView = new RideBusView({
-    el: '#rideBus'
-  });
 
 }).call(this);
 
@@ -301,8 +339,9 @@
         return;
       }
       if (this.collection.shuttle === 'homeward' && index >= 3) {
-
+        return;
       }
+      return App.rideBusModel.set('departureTime', $td.text());
     };
 
     return TimetableListView;

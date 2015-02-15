@@ -14,12 +14,13 @@
     <label><input type="radio" name="shuttle" value="homeward">復路（八束穂→扇が丘）</label>
    </div>
    <div id="rideBus">
+    <span id="departureTime"></span> 乗車の何分前に通知する？<input type="number" id="beforeAlert">
    </div>
    <div id="timetable">
    </div>
   </div>
-<script id="initView" type="text/template">
-テスト
+<script id="departureTimeTmpl" type="text/template">
+乗車バス時刻: <% if (departureTime === '') { %>未選択<% } else { %><%- departureTime %><% } %>
 </script>
 <script id="timetableTmpl" type="text/template">
  <table>
@@ -45,18 +46,18 @@
 </script>
 <script id="timetableRowOutwardTmpl" type="text/template">
  <tr>
-  <td><%= building1 %></td>
-  <td><%= building74 %></td>
-  <td><%= building61 %></td>
-  <td><%= building65 %></td>
+  <td><%- building1 %></td>
+  <td><%- building74 %></td>
+  <td><%- building61 %></td>
+  <td><%- building65 %></td>
  </tr>
 </script>
 <script id="timetableRowHomewardTmpl" type="text/template">
  <tr>
-  <td><%= building65 %></td>
-  <td><%= building61 %></td>
-  <td><%= building74 %></td>
-  <td><%= building1 %></td>
+  <td><%- building65 %></td>
+  <td><%- building61 %></td>
+  <td><%- building74 %></td>
+  <td><%- building1 %></td>
  </tr>
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

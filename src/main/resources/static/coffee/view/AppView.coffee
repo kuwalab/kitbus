@@ -3,8 +3,6 @@ class AppView extends Backbone.View
     'change input[name="shuttle"]': 'onChangeShuttle'
 
   initialize: ->
-    if !AppView.initViewTmpl
-      AppView.initViewTmpl = _.template($('#initView').html())
     do @initView
     return
 
