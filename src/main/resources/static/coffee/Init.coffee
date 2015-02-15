@@ -4,7 +4,7 @@ appView = new App.AppView({
 
 timetableListView = new App.TimetableListView({
   el: '#timetable'
-  collection: App.TimetableList
+  collection: App.timetableList
 })
 
 appView.render()

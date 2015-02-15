@@ -106,8 +106,8 @@
     AppView.prototype.onChangeShuttle = function() {
       var shuttleChecked;
       shuttleChecked = this.$('input[name="shuttle"]:checked').val();
+      App.timetableList.shuttle = shuttleChecked;
       App.timetableList.reset(this.timetableArray[shuttleChecked]);
-      console.log(App.timetableList);
       return this.render();
     };
 
@@ -150,7 +150,6 @@
           }
         }
       }
-      console.log(this.timetableArray);
     };
 
     return AppView;
@@ -199,8 +198,39 @@
       return TimetableListView.__super__.constructor.apply(this, arguments);
     }
 
+    TimetableListView.prototype.initialize = function(options) {
+      if (!TimetableListView.timetableTmpl) {
+        TimetableListView.timetableTmpl = _.template($('#timetableTmpl').html());
+      }
+      if (!TimetableListView.timetableRowOutwardTmpl) {
+        TimetableListView.timetableRowOutwardTmpl = _.template($('#timetableRowOutwardTmpl').html());
+      }
+      if (!TimetableListView.timetableRowHomewardTmpl) {
+        TimetableListView.timetableRowHomewardTmpl = _.template($('#timetableRowHomewardTmpl').html());
+      }
+      _.bindAll(this, 'onReset');
+      this.collection = options.collection;
+      return this.collection.on('reset', this.onReset);
+    };
+
     TimetableListView.prototype.render = function() {
+      var $tbody;
+      this.$el.html(TimetableListView.timetableTmpl());
+      $tbody = this.$('tbody');
+      if (this.collection.shuttle === 'outward') {
+        this.collection.each(function(timetableModel) {
+          return $tbody.append(TimetableListView.timetableRowOutwardTmpl(timetableModel.toJSON()));
+        });
+      } else {
+        this.collection.each(function(timetableModel) {
+          return $tbody.append(TimetableListView.timetableRowHomewardTmpl(timetableModel.toJSON()));
+        });
+      }
       return this;
+    };
+
+    TimetableListView.prototype.onReset = function() {
+      return this.render();
     };
 
     return TimetableListView;
@@ -220,7 +250,7 @@
 
   timetableListView = new App.TimetableListView({
     el: '#timetable',
-    collection: App.TimetableList
+    collection: App.timetableList
   });
 
   appView.render();

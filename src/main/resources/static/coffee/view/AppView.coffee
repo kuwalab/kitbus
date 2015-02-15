@@ -13,8 +13,9 @@ class AppView extends Backbone.View
 
   onChangeShuttle: ->
     shuttleChecked = @$('input[name="shuttle"]:checked').val()
+    # なにかいい方法がないか。。
+    App.timetableList.shuttle = shuttleChecked
     App.timetableList.reset(@timetableArray[shuttleChecked])
-    console.log App.timetableList
     do @render
 
   initView: ->
@@ -49,7 +50,6 @@ class AppView extends Backbone.View
           @timetableArray[timetable.shuttle.toLowerCase()].push(
             App.TimetableModel.setTime(timetable.shuttle, timeArray)
           )
-    console.log @timetableArray
     return
 
 dateFormat = (targetDate) ->
