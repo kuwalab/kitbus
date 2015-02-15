@@ -237,7 +237,16 @@
     };
 
     TimetableListView.prototype.onClickTime = function(e) {
-      return console.log(e.currentTarget);
+      var $td, index;
+      $td = $(e.currentTarget);
+      index = $td.parent('tr').find('td').index($td);
+      if (this.collection.shuttle === 'outward' && index >= 1) {
+        return;
+      }
+      if (this.collection.shuttle === 'homeward' && index >= 3) {
+        return;
+      }
+      return console.log(index);
     };
 
     return TimetableListView;

@@ -33,6 +33,10 @@ class TimetableListView extends Backbone.View
     do @render
 
   onClickTime: (e) ->
-    console.log e.currentTarget
+    $td = $(e.currentTarget)
+    index = $td.parent('tr').find('td').index($td)
+    return if @collection.shuttle is 'outward' and index >= 1
+    return if @collection.shuttle is 'homeward' and index >= 3
+    console.log index
 
 App.TimetableListView = TimetableListView
