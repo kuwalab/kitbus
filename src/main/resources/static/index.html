@@ -9,18 +9,20 @@
  </head>
  <body>
   <div id="main">
-   <div class="shuttle">
-    <input type="radio" name="shuttle" id="shuttle1" value="outward"><!--
- --><label for="shuttle1">往路（扇が丘→八束穂）</label><!--
- --><input type="radio" name="shuttle" id="shuttle2" value="homeward"><!--
- --><label for="shuttle2">復路（八束穂→扇が丘）</label>
-   </div>
-   <div id="rideBus">
-    <span id="departureTime"></span> 乗車の何分前に通知する？<input type="number" id="beforeAlert" value="10">
-   </div>
-   <div id="timetable">
+   <div id="mainContent">
+    <div id="rideBus">
+     <span id="departureTime"></span> 乗車の何分前に通知する？<input type="number" id="beforeAlert" value="10">
+    </div>
+    <div class="tabGroup">
+     <input type="radio" name="shuttle" id="shuttle1" value="outward"><!--
+  --><label for="shuttle1">往路（扇が丘→八束穂）</label><!--
+  --><input type="radio" name="shuttle" id="shuttle2" value="homeward"><!--
+  --><label for="shuttle2">復路（八束穂→扇が丘）</label>
+    </div>
+    <div id="timetable">
    </div>
   </div>
+ </div>
 <script id="departureTimeTmpl" type="text/template">
 乗車バス時刻: <% if (departureTime === '') { %>未選択<% } else { %><%- departureTime %><% } %>
 </script>
