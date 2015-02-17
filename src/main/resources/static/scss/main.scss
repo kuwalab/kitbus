@@ -25,8 +25,9 @@
     background-color: #cccccc;
     border: solid 1px #999;
     border-radius: 5px 5px 0 0;
-    padding: 5px;
     display: inline-block;
+    margin: 0 3px 0 0;
+    padding: 5px;
   }
 
   input[type="radio"]:checked + label {
