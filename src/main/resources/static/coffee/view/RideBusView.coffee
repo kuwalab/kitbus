@@ -19,7 +19,7 @@ class RideBusView extends Backbone.View
     departureTime = @model.get('departureTime')
     return if departureTime is ''
     beforeAlert = parseInt $('#beforeAlert').val(), 10
-    return if beforeAlert is NaN
+    return if isNaN beforeAlert
 
     Notification.requestPermission (selectedPermission) ->
       permission = selectedPermission

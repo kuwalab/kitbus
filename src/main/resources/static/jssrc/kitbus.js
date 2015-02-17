@@ -246,7 +246,7 @@
         return;
       }
       beforeAlert = parseInt($('#beforeAlert').val(), 10);
-      if (beforeAlert === NaN) {
+      if (isNaN(beforeAlert)) {
         return;
       }
       Notification.requestPermission(function(selectedPermission) {
