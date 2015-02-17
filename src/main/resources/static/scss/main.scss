@@ -22,7 +22,7 @@
   }
 
   label {
-    background-color: #cccccc;
+    background-color: #ccc;
     border: solid 1px #999;
     border-radius: 5px 5px 0 0;
     display: inline-block;
@@ -31,7 +31,8 @@
   }
 
   input[type="radio"]:checked + label {
-    background-color: #ffffff;
+    background-color: #fff;
+    border-bottom: solid 1px #fff;
   }
 }
 
