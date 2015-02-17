@@ -157,7 +157,6 @@
 
     AppView.prototype.setTimetable = function(timetableData) {
       var timeArray, timetable, _i, _j, _len, _len1, _ref, _ref1;
-      this.serviceDay = 'WEEKDAY';
       this.timetableArray = {
         outward: [],
         homeward: []

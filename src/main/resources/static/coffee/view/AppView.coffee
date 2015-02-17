@@ -35,9 +35,6 @@ class AppView extends Backbone.View
     return
 
   setTimetable: (timetableData) ->
-    # TODO テストコード
-    @serviceDay = 'WEEKDAY'
-
     @timetableArray = {
       outward: []
       homeward: []
