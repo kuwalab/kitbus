@@ -14,7 +14,7 @@
 }
 
 .tabGroup {
-　padding: 6px 0 6px 0;
+  margin: 0 0 -1px 0;
 
   input[type="radio"] {
     position: absolute;
@@ -26,6 +26,7 @@
     border: solid 1px #999;
     border-radius: 5px 5px 0 0;
     padding: 5px;
+    display: inline-block;
   }
 
   input[type="radio"]:checked + label {
