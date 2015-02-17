@@ -10,6 +10,3 @@ timetableListView = new App.TimetableListView(
 App.rideBusView = new App.RideBusView(
   el: '#rideBus'
 )
-
-appView.render()
-

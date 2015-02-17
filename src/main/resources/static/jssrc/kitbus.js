@@ -384,6 +384,4 @@
     el: '#rideBus'
   });
 
-  appView.render();
-
 }).call(this);
