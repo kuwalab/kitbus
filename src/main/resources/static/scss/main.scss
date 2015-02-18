@@ -12,7 +12,7 @@
 #mainContent {
   padding: 10px;
   margin: 0 auto 0 auto;
-  width: 30em;
+  width: 28em;
 }
 
 .tabGroup {
@@ -39,6 +39,10 @@
 }
 
 #timetable {
-  padding: 5px;
   border: solid 1px #999;
+  padding: 5px;
+
+  table {
+    margin: 1em auto 0 auto;
+  }
 }
