@@ -45,6 +45,10 @@
   table {
     margin: 1em auto 0 auto;
   }
+  
+  tbody tr:hover {
+    background-color: #c9e6c9;
+  }
 
   th {
     width: 5em;
@@ -52,5 +56,9 @@
 
   td {
     text-align: right;
+    
+    &:hover {
+      background-color: #81c784;
+    }
   }
 }
