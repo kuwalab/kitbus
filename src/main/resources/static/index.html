@@ -11,7 +11,8 @@
   <div id="main">
    <div id="mainContent">
     <div id="rideBus">
-     <span id="departureTime"></span> 乗車の何分前に通知する？<input type="number" id="beforeAlert" value="10">
+     <div id="departureTime"></div>
+     乗車の何分前に通知する？<input type="number" id="beforeAlert" value="10">
     </div>
     <div class="tabGroup">
      <input type="radio" name="shuttle" id="shuttle1" value="outward"><!--
@@ -24,7 +25,7 @@
   </div>
  </div>
 <script id="departureTimeTmpl" type="text/template">
-乗車バス時刻: <% if (departureTime === '') { %>未選択<% } else { %><%- departureTime %><% } %>
+乗車バス時刻: <span class="departureTime"><% if (departureTime === '') { %>未選択<% } else { %><%- departureTime %><% } %></span>
 </script>
 <script id="timetableTmpl" type="text/template">
  <table>
