@@ -150,7 +150,8 @@
         };
       })(this)).then((function(_this) {
         return function(data) {
-          return _this.setTimetable(data);
+          _this.setTimetable(data);
+          return _this.$('input[name="shuttle"]:eq(0)').trigger('click');
         };
       })(this));
     };
