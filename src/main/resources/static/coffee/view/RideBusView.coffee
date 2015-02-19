@@ -38,7 +38,6 @@ class RideBusView extends Backbone.View
       notify = new Notification('バスが来ます', { tag: 'tag', body: '通知の本文', icon: 'icon.png' })
     , targetSecond)
 
-
   onChangeBeforeAlert: ->
     do @setTimer
 
