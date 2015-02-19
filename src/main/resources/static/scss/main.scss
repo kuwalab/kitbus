@@ -10,8 +10,18 @@
 }
 
 #mainContent {
+  display: flex;
+  flex-wrap: nowrap;
   padding: 10px;
   margin: 0 auto 0 auto;
+  width: 50em;
+}
+
+#rideBus {
+  width: 22em;
+}
+
+#selectBus {
   width: 28em;
 }
 
