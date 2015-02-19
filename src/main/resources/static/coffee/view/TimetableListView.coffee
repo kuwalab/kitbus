@@ -11,12 +11,12 @@ class TimetableListView extends Backbone.View
 
     _.bindAll @, 'onReset'
     @collection = options.collection
-    @collection.on('reset', @onReset)
+    @collection.on 'reset', @onReset
 
   render: ->
     @$el.html(TimetableListView.timetableTmpl())
-    $thead = @$('thead')
-    $tbody = @$('tbody')
+    $thead = @$ 'thead'
+    $tbody = @$ 'tbody'
     if @collection.shuttle is 'outward'
       $thead.html(TimetableListView.timetableHeaderOutwardTmpl())
       @collection.each((timetableModel) ->
@@ -33,7 +33,7 @@ class TimetableListView extends Backbone.View
     do @render
 
   onClickTime: (e) ->
-    $td = $(e.currentTarget)
+    $td = $ e.currentTarget
     index = $td.parent('tr').find('td').index($td)
     return if @collection.shuttle is 'outward' and index >= 1
     return if @collection.shuttle is 'homeward' and index >= 3

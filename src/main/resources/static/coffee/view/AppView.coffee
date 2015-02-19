@@ -13,7 +13,7 @@ class AppView extends Backbone.View
     shuttleChecked = @$('input[name="shuttle"]:checked').val()
     # なにかいい方法がないか。。
     App.timetableList.shuttle = shuttleChecked
-    App.timetableList.reset(@timetableArray[shuttleChecked])
+    App.timetableList.reset @timetableArray[shuttleChecked]
     do @render
 
   initView: ->
@@ -23,14 +23,14 @@ class AppView extends Backbone.View
       dataType: 'json'
     ).then((data) =>
       # 運行の曜日を取得
-      @serviceDay = getServiceDay(data)
+      @serviceDay = getServiceDay data
       $.ajax(
         url: '/api/timetable'
         cache: false
         dataType: 'json'
       )
     ).then((data) =>
-      @setTimetable(data)
+      @setTimetable data
     )
     return
 
@@ -43,7 +43,7 @@ class AppView extends Backbone.View
       if timetable.serviceDay is @serviceDay
         for timeArray in timetable.busStopTimeList
           @timetableArray[timetable.shuttle.toLowerCase()].push(
-            App.TimetableModel.setTime(timetable.shuttle, timeArray)
+            App.TimetableModel.setTime timetable.shuttle, timeArray
           )
     return
 

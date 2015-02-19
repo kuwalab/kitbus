@@ -16,7 +16,7 @@ class RideBusView extends Backbone.View
     @
 
   setTimer: ->
-    departureTime = @model.get('departureTime')
+    departureTime = @model.get 'departureTime'
     return if departureTime is ''
     beforeAlert = parseInt $('#beforeAlert').val(), 10
     return if isNaN beforeAlert
@@ -28,12 +28,12 @@ class RideBusView extends Backbone.View
     nowHour = date.getHours()
     nowMinute = date.getMinutes()
     nowSecond = date.getSeconds()
-    targetTime = departureTime.split(':')
+    targetTime = departureTime.split ':'
     for value, i in targetTime
       targetTime[i] = parseInt value, 10
     targetSecond = (((targetTime[0] - nowHour) * 60 + targetTime[1] - nowMinute - beforeAlert) * 60 - nowSecond) * 1000
     return if targetSecond <= 0
-    if @timer then clearTimeout(@timer)
+    if @timer then clearTimeout @timer
     @timer = setTimeout( ->
       notify = new Notification('バスが来ます', { tag: 'tag', body: '通知の本文', icon: 'icon.png' })
     , targetSecond)
