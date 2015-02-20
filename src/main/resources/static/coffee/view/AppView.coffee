@@ -7,6 +7,15 @@ class AppView extends Backbone.View
     Notification.requestPermission (selectedPermission) ->
       permission = selectedPermission
     do @initView
+    do @intervalTime
+    return
+
+  intervalTime: ->
+    setInterval =>
+      do @updateTime
+    , 1000
+
+  updateTime: ->
     return
 
   render: ->

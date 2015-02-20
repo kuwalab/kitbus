@@ -125,7 +125,18 @@
         return permission = selectedPermission;
       });
       this.initView();
+      this.intervalTime();
     };
+
+    AppView.prototype.intervalTime = function() {
+      return setInterval((function(_this) {
+        return function() {
+          return _this.updateTime();
+        };
+      })(this), 1000);
+    };
+
+    AppView.prototype.updateTime = function() {};
 
     AppView.prototype.render = function() {
       return this;
