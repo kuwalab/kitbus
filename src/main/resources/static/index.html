@@ -14,6 +14,8 @@
    </div>
    <div id="mainContent">
     <div id="rideBus">
+     <div id="dateTime"><span id="date"></span> <span id="time"></span></div>
+     <div id="schedule">運行スケジュール 平日</div>
      <div id="departureTime"></div>
      <div id="notif">発車の<input type="number" id="beforeAlert" value="10">分前に通知する</div>
      <div id="notifTest"><input type="button" value="通知のテスト"></div>
@@ -29,6 +31,7 @@
     </div>
    </div>
   </div>
+  <div id="footer">要望や不具合等の連絡は、<a href="https://twitter.com/kuwalab">@kuwalab</a>か<a href="https://github.com/kuwalab/kitbus/issues/new">issue</a>へどうそ</div>
  </div>
 <script id="departureTimeTmpl" type="text/template">
 乗車バス時刻: <span class="departureTime"><% if (departureTime === '') { %>未選択<% } else { %><%- departureTime %><% } %></span>

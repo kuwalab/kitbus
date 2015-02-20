@@ -14,6 +14,11 @@
   margin: 0 0 1em 0;
 }
 
+#footer {
+  margin: 2em 1em 0 0;
+  text-align: right;
+}
+
 #mainContent {
   display: flex;
   flex-wrap: nowrap;
@@ -23,16 +28,13 @@
 }
 
 #rideBus {
-  width: 22em;
+  width: 18em;
+  font-size: 1.5em;
+  line-height: 1.6em;
 }
 
 #selectBus {
-  width: 28em;
-}
-
-#departureTime {
-  font-size: 1.5em;
-  margin: 0 0 0.2em 0;
+  width: 32em;
 }
 
 .departureTime {
@@ -42,7 +44,6 @@
 }
 
 #notif {
-  font-size: 1.5em;
   margin: 0 0 0.3em 0;
 }
 

@@ -17,6 +17,9 @@ class AppView extends Backbone.View
     do @render
 
   initView: ->
+    # 日付の表示
+    date = new Date()
+    $('#date').text("#{date.getMonth() + 1}月#{date.getDate()}日")
     $.ajax(
       url: '/api/servicetable'
       cache: false

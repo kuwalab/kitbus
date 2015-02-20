@@ -135,6 +135,9 @@
     };
 
     AppView.prototype.initView = function() {
+      var date;
+      date = new Date();
+      $('#date').text("" + (date.getMonth() + 1) + "月" + (date.getDate()) + "日");
       $.ajax({
         url: '/api/servicetable',
         cache: false,
