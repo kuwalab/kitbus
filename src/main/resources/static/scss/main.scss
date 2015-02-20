@@ -9,14 +9,27 @@
   display: block;
 }
 
+html, body {
+  height: 100%;
+}
+
+#main {
+  min-height: 100%;
+  position: relative;
+}
+
 #header {
   background-color: #4285f4;
   margin: 0 0 1em 0;
 }
 
 #footer {
-  margin: 2em 1em 0 0;
+  bottom: 1em;
+  height: 1em;
+  position: absolute;
+  right: 1em;
   text-align: right;
+  width: 100%;
 }
 
 #mainContent {
