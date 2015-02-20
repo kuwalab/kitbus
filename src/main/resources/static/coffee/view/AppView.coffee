@@ -1,8 +1,11 @@
 class AppView extends Backbone.View
   events:
     'change input[name="shuttle"]': 'onChangeShuttle'
+    'click #notifTestButton': 'onClickNotifTest'
 
   initialize: ->
+    Notification.requestPermission (selectedPermission) ->
+      permission = selectedPermission
     do @initView
     return
 
@@ -15,6 +18,9 @@ class AppView extends Backbone.View
     App.timetableList.shuttle = shuttleChecked
     App.timetableList.reset @timetableArray[shuttleChecked]
     do @render
+
+  onClickNotifTest: ->
+    notify = new Notification('通知のテスト', { tag: 'tag', body: 'これが出ていれば、通知のテストはOKです', icon: 'image/bus.png' })
 
   initView: ->
     # 日付の表示
@@ -35,9 +41,6 @@ class AppView extends Backbone.View
     ).then((data) =>
       @setTimetable data
       @$('input[name="shuttle"]:eq(0)').trigger('click');
-
-      Notification.requestPermission (selectedPermission) ->
-        permission = selectedPermission
     )
     return
 

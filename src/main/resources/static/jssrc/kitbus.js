@@ -115,10 +115,15 @@
     }
 
     AppView.prototype.events = {
-      'change input[name="shuttle"]': 'onChangeShuttle'
+      'change input[name="shuttle"]': 'onChangeShuttle',
+      'click #notifTestButton': 'onClickNotifTest'
     };
 
     AppView.prototype.initialize = function() {
+      Notification.requestPermission(function(selectedPermission) {
+        var permission;
+        return permission = selectedPermission;
+      });
       this.initView();
     };
 
@@ -132,6 +137,15 @@
       App.timetableList.shuttle = shuttleChecked;
       App.timetableList.reset(this.timetableArray[shuttleChecked]);
       return this.render();
+    };
+
+    AppView.prototype.onClickNotifTest = function() {
+      var notify;
+      return notify = new Notification('通知のテスト', {
+        tag: 'tag',
+        body: 'これが出ていれば、通知のテストはOKです',
+        icon: 'image/bus.png'
+      });
     };
 
     AppView.prototype.initView = function() {
@@ -154,11 +168,7 @@
       })(this)).then((function(_this) {
         return function(data) {
           _this.setTimetable(data);
-          _this.$('input[name="shuttle"]:eq(0)').trigger('click');
-          return Notification.requestPermission(function(selectedPermission) {
-            var permission;
-            return permission = selectedPermission;
-          });
+          return _this.$('input[name="shuttle"]:eq(0)').trigger('click');
         };
       })(this));
     };
