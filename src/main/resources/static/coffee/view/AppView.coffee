@@ -35,6 +35,9 @@ class AppView extends Backbone.View
     ).then((data) =>
       @setTimetable data
       @$('input[name="shuttle"]:eq(0)').trigger('click');
+
+      Notification.requestPermission (selectedPermission) ->
+        permission = selectedPermission
     )
     return
 

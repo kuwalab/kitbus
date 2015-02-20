@@ -154,7 +154,11 @@
       })(this)).then((function(_this) {
         return function(data) {
           _this.setTimetable(data);
-          return _this.$('input[name="shuttle"]:eq(0)').trigger('click');
+          _this.$('input[name="shuttle"]:eq(0)').trigger('click');
+          return Notification.requestPermission(function(selectedPermission) {
+            var permission;
+            return permission = selectedPermission;
+          });
         };
       })(this));
     };
@@ -253,10 +257,6 @@
       if (isNaN(beforeAlert)) {
         return;
       }
-      Notification.requestPermission(function(selectedPermission) {
-        var permission;
-        return permission = selectedPermission;
-      });
       date = new Date();
       nowHour = date.getHours();
       nowMinute = date.getMinutes();
@@ -278,7 +278,7 @@
         return notify = new Notification('バスが来ます', {
           tag: 'tag',
           body: '通知の本文',
-          icon: 'icon.png'
+          icon: 'image/bus.png'
         });
       }, targetSecond);
     };

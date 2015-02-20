@@ -21,9 +21,6 @@ class RideBusView extends Backbone.View
     beforeAlert = parseInt $('#beforeAlert').val(), 10
     return if isNaN beforeAlert
 
-    Notification.requestPermission (selectedPermission) ->
-      permission = selectedPermission
-
     date = new Date()
     nowHour = date.getHours()
     nowMinute = date.getMinutes()
@@ -35,7 +32,7 @@ class RideBusView extends Backbone.View
     return if targetSecond <= 0
     if @timer then clearTimeout @timer
     @timer = setTimeout( ->
-      notify = new Notification('バスが来ます', { tag: 'tag', body: '通知の本文', icon: 'icon.png' })
+      notify = new Notification('バスが来ます', { tag: 'tag', body: '通知の本文', icon: 'image/bus.png' })
     , targetSecond)
 
   onChangeBeforeAlert: ->
