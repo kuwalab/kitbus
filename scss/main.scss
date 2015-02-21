@@ -3,3 +3,70 @@
 @import "reset";
 @import "base";
 
+.page {
+  display: flex;
+}
+
+.message1 {
+  font-size: 2.5em;
+  line-height: 1.5em;
+  padding: 5em 0 0 1em;
+}
+
+.image2 {
+  padding: 16em 0 0 0;
+  img {
+    border: solid 1px #ccc;
+    width: 500px;
+  }
+}
+
+.message2 {
+  font-size: 2.5em;
+  line-height: 1.5em;
+  padding: 6em 1em 0 2em;
+}
+
+.image3 {
+  padding: 15em 0 0 4em;
+  img {
+    border: solid 1px #ccc;
+    width: 500px;
+  }
+}
+
+.message3 {
+  font-size: 2.5em;
+  line-height: 1.5em;
+  padding: 8em 0 0 1em;
+}
+
+.image4 {
+  padding: 15em 0 0 0;
+  img {
+  }
+}
+
+.message4 {
+  font-size: 2.5em;
+  line-height: 1.5em;
+  padding: 8em 1em 0 2em;
+}
+
+.start {
+  border: solid 1px #ccc;
+  border-width: 1px 0 0 0;
+  font-size: 2.5em;
+  margin: 5em 0 5em 0;
+  padding: 5em 0 5em 0;
+  text-align: center;
+
+  input {
+    background-color: #4285f4;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 1em;
+    margin: 1em;
+    width: 10em;
+  }
+}
