@@ -311,9 +311,9 @@
       }
       return this.timer = setTimeout(function() {
         var notify;
-        return notify = new Notification('バスが来ます', {
+        return notify = new Notification('もうすぐバスが来ます', {
           tag: 'tag',
-          body: '通知の本文',
+          body: "" + departureTime + "発のバスがあと" + beforeAlert + "分で発車します",
           icon: 'image/bus.png'
         });
       }, targetSecond);

@@ -32,7 +32,7 @@ class RideBusView extends Backbone.View
     return if targetSecond <= 0
     if @timer then clearTimeout @timer
     @timer = setTimeout( ->
-      notify = new Notification('バスが来ます', { tag: 'tag', body: '通知の本文', icon: 'image/bus.png' })
+      notify = new Notification('もうすぐバスが来ます', { tag: 'tag', body: "#{departureTime}発のバスがあと#{beforeAlert}分で発車します", icon: 'image/bus.png' })
     , targetSecond)
 
   onChangeBeforeAlert: ->

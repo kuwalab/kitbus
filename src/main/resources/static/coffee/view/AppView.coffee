@@ -48,7 +48,6 @@ class AppView extends Backbone.View
     ).then((data) =>
       # 運行の曜日を取得
       @serviceDay = getServiceDay data
-      
       serviceName =
         WEEKDAY: '平日'
         SATURDAY: '土曜'
