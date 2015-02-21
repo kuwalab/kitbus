@@ -6,16 +6,22 @@ class AppView extends Backbone.View
   initialize: ->
     Notification.requestPermission (selectedPermission) ->
       permission = selectedPermission
-    do @initView
+    @$time = @$('#time')
     do @intervalTime
+    do @initView
     return
 
   intervalTime: ->
+    do @updateTime
     setInterval =>
       do @updateTime
     , 1000
 
   updateTime: ->
+    date = new Date()
+    minute = date.getMinutes()
+    dispTime = date.getHours() + ":" + if minute < 10 then '0' + minute else minute
+    @$time.text(dispTime)
     return
 
   render: ->

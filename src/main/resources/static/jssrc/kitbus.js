@@ -124,11 +124,13 @@
         var permission;
         return permission = selectedPermission;
       });
-      this.initView();
+      this.$time = this.$('#time');
       this.intervalTime();
+      this.initView();
     };
 
     AppView.prototype.intervalTime = function() {
+      this.updateTime();
       return setInterval((function(_this) {
         return function() {
           return _this.updateTime();
@@ -136,7 +138,13 @@
       })(this), 1000);
     };
 
-    AppView.prototype.updateTime = function() {};
+    AppView.prototype.updateTime = function() {
+      var date, dispTime, minute;
+      date = new Date();
+      minute = date.getMinutes();
+      dispTime = date.getHours() + ":" + (minute < 10 ? '0' + minute : minute);
+      this.$time.text(dispTime);
+    };
 
     AppView.prototype.render = function() {
       return this;
