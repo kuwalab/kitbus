@@ -177,7 +177,14 @@
         dataType: 'json'
       }).then((function(_this) {
         return function(data) {
+          var serviceName;
           _this.serviceDay = getServiceDay(data);
+          serviceName = {
+            WEEKDAY: '平日',
+            SATURDAY: '土曜',
+            SUNDAY: '運行なし'
+          };
+          _this.$('#service').text(serviceName[_this.serviceDay]);
           return $.ajax({
             url: '/api/timetable',
             cache: false,
